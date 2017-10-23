@@ -24,4 +24,25 @@
         android:text="BUTTON"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <RadioGroup
+        android:id="@+id/myRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/myRadio1"
+            android:text="hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/myRadio2"
+            android:text="world"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/myRadio3"
+            android:text="android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
 </LinearLayout>
