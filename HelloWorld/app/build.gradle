@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.example.a.helloworld"
+        minSdkVersion 16  //최소지원버전 이하 버전은 모바일에서는 검색이 안될수도있다.
+        targetSdkVersion 26
+        versionCode 1 //playStore 등록 버전 버전이 높을경우 자동 업데이트
+        versionName "1.0" //버전이름
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false  //true 소스압축
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //소스압축시 제외 파일 지정
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}
