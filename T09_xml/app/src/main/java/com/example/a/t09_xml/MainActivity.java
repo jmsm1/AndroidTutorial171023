@@ -3,8 +3,8 @@ package com.example.a.t09_xml;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -13,17 +13,25 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+    TextView textView;
+    class MyPullParse extends AsyncTask<String , Void , String>{
+        String res;
 
-    class MyPullParse extends AsyncTask<String , Void , Void>{
 
         @Override
-        protected Void doInBackground(String... params) {
+        protected void onPostExecute(String str) {
+            super.onPostExecute(str);
+            textView.setText(str);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
             XmlPullParserFactory factory = null;
             try {
                 factory = XmlPullParserFactory.newInstance();
                 XmlPullParser xpp = factory.newPullParser();
                 InputStream input = new URL(params[0]).openStream();
-                xpp.setInput(input,"UTF-8");
+                xpp.setInput(input,"utf-8");
 
                 int eventType = xpp.getEventType();
                 boolean bRead = false;
@@ -35,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }else if(eventType == XmlPullParser.TEXT){
                         if(bRead){
-                            Log.d("weather" , xpp.getText());
+                            res += xpp.getText() + " ";
                             bRead = false;
                         }
                     }
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return null;
+            return res;
         }
     }
 
@@ -55,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textView = (TextView)findViewById(R.id.textView);
     }
 
     public void onBtnClick(View v){
