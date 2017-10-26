@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -21,10 +23,15 @@ public class MainActivity extends AppCompatActivity {
                  "{'name':'222' ,'tel':'010-2222-3333' , 'age':30 }," +
                  "{'name':'333' ,'tel':'010-2222-4444' , 'age':40 }]";
 
+    ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageView = (ImageView)findViewById(R.id.imageView);
+        String imagePath = "https://iamprogrammersite.files.wordpress.com/2016/07/logo2.png";
+        Glide.with(this).load(imagePath).into(imageView);
 
         try {
             JSONArray jsonArray = new JSONArray(str);
